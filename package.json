@@ -1,0 +1,23 @@
+{
+  "name": "comercial-colombiana-web",
+  "version": "1.0.0",
+  "description": "Nueva web de Comercial Colombiana - Agencia de Seguros",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": ["seguros", "colombia", "bogota"],
+  "author": "Comercial Colombiana",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.2",
+    "vite": "^7.3.0"
+  },
+  "dependencies": {
+    "lucide-react": "^0.562.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  }
+}
