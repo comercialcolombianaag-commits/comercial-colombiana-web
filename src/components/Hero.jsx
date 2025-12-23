@@ -1,219 +1,340 @@
-import React from 'react';
-import { Shield, ArrowRight, CheckCircle, TrendingUp } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Shield, ArrowRight, CheckCircle, Users, Award } from 'lucide-react';
 
 const Hero = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [particles, setParticles] = useState([]);
+
+  useEffect(() => {
+    // Generar partículas sutiles
+    const newParticles = Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1,
+      duration: Math.random() * 25 + 15,
+      delay: Math.random() * 5
+    }));
+    setParticles(newParticles);
+
+    // Seguir el mouse suavemente
+    const handleMouseMove = (e) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth) * 15 - 7.5,
+        y: (e.clientY / window.innerHeight) * 15 - 7.5
+      });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
     <section id="inicio" style={{
       position: 'relative',
-      minHeight: '90vh',
+      minHeight: '95vh',
       display: 'flex',
       alignItems: 'center',
-      background: 'linear-gradient(135deg, #1E3A8A 0%, #06B6D4 100%)',
+      background: 'linear-gradient(135deg, #1E3A8A 0%, #0f1b47 50%, #000000 100%)',
       overflow: 'hidden'
     }}>
-      {/* Fondo con pattern */}
+      {/* Grid sutil animado */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        opacity: 0.1,
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        backgroundImage: `
+          linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px)
+        `,
+        backgroundSize: '60px 60px',
+        transform: 'perspective(800px) rotateX(60deg)',
+        transformOrigin: 'center top',
+        opacity: 0.4,
+        animation: 'gridMove 20s linear infinite'
+      }} />
+
+      {/* Partículas flotantes sutiles */}
+      {particles.map(particle => (
+        <div
+          key={particle.id}
+          style={{
+            position: 'absolute',
+            left: `${particle.x}%`,
+            top: `${particle.y}%`,
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            background: 'rgba(6, 182, 212, 0.4)',
+            borderRadius: '50%',
+            animation: `floatSmooth ${particle.duration}s ease-in-out infinite`,
+            animationDelay: `${particle.delay}s`,
+            boxShadow: '0 0 10px rgba(6, 182, 212, 0.3)',
+            filter: 'blur(0.5px)'
+          }}
+        />
+      ))}
+
+      {/* Luz suave siguiendo el mouse */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: `radial-gradient(500px circle at ${50 + mousePosition.x}% ${50 + mousePosition.y}%, rgba(6, 182, 212, 0.08), transparent 50%)`,
+        pointerEvents: 'none',
+        transition: 'background 0.3s ease'
+      }} />
+
+      {/* Formas geométricas decorativas */}
+      <div style={{
+        position: 'absolute',
+        top: '20%',
+        right: '10%',
+        width: '300px',
+        height: '300px',
+        background: 'radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%)',
+        borderRadius: '50%',
+        filter: 'blur(60px)',
+        animation: 'floatSmooth 15s ease-in-out infinite'
+      }} />
+
+      <div style={{
+        position: 'absolute',
+        bottom: '15%',
+        left: '5%',
+        width: '250px',
+        height: '250px',
+        background: 'radial-gradient(circle, rgba(30, 58, 138, 0.15) 0%, transparent 70%)',
+        borderRadius: '50%',
+        filter: 'blur(50px)',
+        animation: 'floatSmooth 18s ease-in-out infinite reverse'
       }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gridTemplateColumns: '1fr',
           gap: '3rem',
-          alignItems: 'center'
+          alignItems: 'center',
+          textAlign: 'center',
+          maxWidth: '1100px',
+          margin: '0 auto'
         }}>
-          {/* Contenido izquierdo */}
+          {/* Contenido principal */}
           <div className="animate-fadeInUp" style={{ color: 'white' }}>
+            
+            {/* Badge elegante */}
             <div style={{
-              display: 'inline-block',
-              background: 'rgba(245, 158, 11, 0.2)',
-              color: '#F59E0B',
-              padding: '0.5rem 1rem',
-              borderRadius: '2rem',
-              fontSize: '0.875rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              background: 'rgba(6, 182, 212, 0.08)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(6, 182, 212, 0.2)',
+              padding: '0.75rem 1.75rem',
+              borderRadius: '3rem',
+              fontSize: '0.9375rem',
               fontWeight: '600',
-              marginBottom: '1.5rem',
-              border: '1px solid rgba(245, 158, 11, 0.3)'
+              marginBottom: '2.5rem',
+              boxShadow: '0 4px 20px rgba(6, 182, 212, 0.1)'
             }}>
-              ✨ Más de 50 años protegiendo Colombia
+              <CheckCircle size={18} style={{ color: '#06B6D4' }} />
+              <span style={{ color: '#E0F2FE' }}>Más de 50 años protegiendo a Colombia</span>
             </div>
 
+            {/* Título principal elegante */}
             <h1 style={{
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-              fontWeight: '900',
-              lineHeight: '1.1',
+              fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+              fontWeight: '800',
+              lineHeight: '1.15',
               marginBottom: '1.5rem',
-              textShadow: '0 2px 20px rgba(0,0,0,0.2)'
+              letterSpacing: '-0.02em'
             }}>
-              Protegemos lo más
               <span style={{
                 display: 'block',
-                background: 'linear-gradient(to right, #F59E0B, #FCD34D)',
+                color: 'white',
+                marginBottom: '0.75rem'
+              }}>
+                Tecnología al servicio
+              </span>
+              <span style={{
+                display: 'block',
+                background: 'linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text'
               }}>
-                valioso de tu vida
+                de tu tranquilidad
               </span>
             </h1>
 
+            {/* Subtítulo profesional */}
             <p style={{
-              fontSize: '1.25rem',
-              marginBottom: '2.5rem',
-              opacity: 0.95,
-              lineHeight: '1.8'
+              fontSize: 'clamp(1.125rem, 2vw, 1.375rem)',
+              marginBottom: '3rem',
+              color: '#CBD5E1',
+              lineHeight: '1.7',
+              maxWidth: '750px',
+              margin: '0 auto 3rem',
+              fontWeight: '400'
             }}>
-              Asesoría experta en seguros para personas y empresas en Bogotá.
-              Sin letra pequeña, sin rodeos. Solo protección real.
+              Protegemos tu patrimonio, familia y empresa con asesoría experta 
+              y las mejores soluciones del mercado. Sin letra pequeña, sin sorpresas.
             </p>
 
-            {/* CTAs */}
+            {/* CTAs elegantes */}
             <div style={{
               display: 'flex',
-              gap: '1rem',
+              gap: '1.25rem',
+              justifyContent: 'center',
               flexWrap: 'wrap',
-              marginBottom: '3rem'
+              marginBottom: '4rem'
             }}>
-              <a href="#test" className="btn btn-primary" style={{
-                background: 'white',
-                color: '#1E3A8A',
-                boxShadow: '0 10px 30px rgba(255,255,255,0.3)',
+              {/* CTA Principal - Elegante */}
+              <a href="#test" style={{
+                position: 'relative',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                padding: '1.25rem 2.5rem',
                 fontSize: '1.125rem',
-                padding: '1.25rem 2.5rem'
+                fontWeight: '700',
+                background: 'linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)',
+                color: 'white',
+                borderRadius: '0.875rem',
+                textDecoration: 'none',
+                boxShadow: '0 8px 30px rgba(6, 182, 212, 0.35)',
+                transition: 'all 0.3s ease',
+                border: 'none',
+                overflow: 'hidden'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-3px)';
+                e.currentTarget.style.boxShadow = '0 12px 40px rgba(6, 182, 212, 0.45)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 8px 30px rgba(6, 182, 212, 0.35)';
               }}>
-                <Shield size={20} />
-                Descubre tu Nivel de Protección
-                <ArrowRight size={20} />
+                <Shield size={22} />
+                <span>Evalúa tu Protección</span>
+                <ArrowRight size={22} />
               </a>
 
-              <a href="#contacto" className="btn btn-secondary" style={{
-                background: 'rgba(255,255,255,0.15)',
+              {/* CTA Secundario - Glassmorphism sutil */}
+              <a href="#contacto" style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                padding: '1.25rem 2.5rem',
+                fontSize: '1.125rem',
+                fontWeight: '600',
+                background: 'rgba(255, 255, 255, 0.05)',
                 backdropFilter: 'blur(10px)',
                 color: 'white',
-                border: '2px solid rgba(255,255,255,0.3)',
-                fontSize: '1.125rem',
-                padding: '1.25rem 2.5rem'
+                borderRadius: '0.875rem',
+                textDecoration: 'none',
+                border: '1.5px solid rgba(6, 182, 212, 0.3)',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(6, 182, 212, 0.15)';
+                e.currentTarget.style.borderColor = '#06B6D4';
+                e.currentTarget.style.transform = 'translateY(-3px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                e.currentTarget.style.borderColor = 'rgba(6, 182, 212, 0.3)';
+                e.currentTarget.style.transform = 'translateY(0)';
               }}>
-                Hablar con Experto
+                Agenda Asesoría
+                <ArrowRight size={20} />
               </a>
             </div>
 
-            {/* Stats */}
+            {/* Stats elegantes */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '2rem',
-              padding: '2rem 0',
-              borderTop: '1px solid rgba(255,255,255,0.2)'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gap: '2.5rem',
+              maxWidth: '900px',
+              margin: '0 auto',
+              padding: '3rem 2rem',
+              background: 'rgba(255, 255, 255, 0.03)',
+              backdropFilter: 'blur(20px)',
+              borderRadius: '1.5rem',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)'
             }}>
               {[
-                { number: '50+', label: 'Años de experiencia' },
-                { number: '150+', label: 'Clientes activos' },
-                { number: '22', label: 'Aseguradoras aliadas' }
-              ].map((stat, idx) => (
-                <div key={idx}>
-                  <div style={{
-                    fontSize: '2rem',
-                    fontWeight: '800',
-                    color: '#F59E0B'
+                { 
+                  icon: Award, 
+                  number: '50+', 
+                  label: 'Años de experiencia',
+                  color: '#F59E0B'
+                },
+                { 
+                  icon: Shield, 
+                  number: '22', 
+                  label: 'Aseguradoras aliadas',
+                  color: '#06B6D4'
+                },
+                { 
+                  icon: Users, 
+                  number: '150+', 
+                  label: 'Clientes activos',
+                  color: '#10B981'
+                }
+              ].map((stat, idx) => {
+                const Icon = stat.icon;
+                return (
+                  <div key={idx} style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '0.75rem'
                   }}>
-                    {stat.number}
-                  </div>
-                  <div style={{
-                    fontSize: '0.875rem',
-                    opacity: 0.9
-                  }}>
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Visual derecho - Escudo animado */}
-          <div style={{
-            position: 'relative',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-            <div style={{
-              position: 'relative',
-              animation: 'float 6s ease-in-out infinite'
-            }}>
-              {/* Círculo de fondo */}
-              <div style={{
-                position: 'absolute',
-                width: '400px',
-                height: '400px',
-                borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(6,182,212,0.3) 0%, rgba(30,58,138,0.1) 100%)',
-                filter: 'blur(40px)',
-                animation: 'pulse 3s ease-in-out infinite'
-              }} />
-
-              {/* Escudo principal */}
-              <div style={{
-                position: 'relative',
-                width: '300px',
-                height: '300px',
-                background: 'rgba(255,255,255,0.1)',
-                backdropFilter: 'blur(20px)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: '3px solid rgba(255,255,255,0.3)',
-                boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
-              }}>
-                <Shield size={150} strokeWidth={1.5} style={{ color: 'white' }} />
-
-                {/* Iconos flotantes */}
-                {[
-                  { Icon: CheckCircle, top: '10%', left: '-10%', delay: '0s' },
-                  { Icon: TrendingUp, top: '70%', right: '-10%', delay: '1s' },
-                  { Icon: Shield, top: '40%', right: '-15%', delay: '2s' }
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      position: 'absolute',
-                      top: item.top,
-                      left: item.left,
-                      right: item.right,
-                      width: '60px',
-                      height: '60px',
-                      background: 'white',
-                      borderRadius: '50%',
+                    <div style={{
+                      width: '50px',
+                      height: '50px',
+                      background: `${stat.color}15`,
+                      borderRadius: '0.75rem',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
-                      animation: `float 4s ease-in-out infinite`,
-                      animationDelay: item.delay
-                    }}
-                  >
-                    <item.Icon size={30} style={{ color: '#06B6D4' }} />
+                      border: `1px solid ${stat.color}40`,
+                      marginBottom: '0.5rem'
+                    }}>
+                      <Icon size={24} style={{ color: stat.color }} />
+                    </div>
+                    <div style={{
+                      fontSize: '2.25rem',
+                      fontWeight: '800',
+                      color: stat.color,
+                      lineHeight: '1',
+                      textShadow: `0 0 20px ${stat.color}40`
+                    }}>
+                      {stat.number}
+                    </div>
+                    <div style={{
+                      fontSize: '0.9375rem',
+                      color: '#94A3B8',
+                      textAlign: 'center',
+                      lineHeight: '1.4'
+                    }}>
+                      {stat.label}
+                    </div>
                   </div>
-                ))}
-              </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Onda decorativa inferior */}
+      {/* Onda decorativa inferior elegante */}
       <div style={{
         position: 'absolute',
-        bottom: -1,
+        bottom: 0,
         left: 0,
         right: 0,
-        height: '100px',
-        background: 'white'
+        height: '100px'
       }}>
         <svg
           viewBox="0 0 1440 100"
@@ -223,24 +344,36 @@ const Hero = () => {
             width: '100%',
             height: '100%'
           }}
+          preserveAspectRatio="none"
         >
           <path
-            fill="#1E3A8A"
+            fill="#ffffff"
             fillOpacity="1"
-            d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,42.7C960,43,1056,53,1152,56C1248,59,1344,53,1392,50.7L1440,48L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+            d="M0,50L48,45C96,40,192,30,288,35C384,40,480,60,576,65C672,70,768,60,864,55C960,50,1056,50,1152,55C1248,60,1344,70,1392,75L1440,80L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"
           />
         </svg>
       </div>
 
       <style>{`
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.1); }
+        @keyframes floatSmooth {
+          0%, 100% { 
+            transform: translate(0, 0); 
+            opacity: 0.6;
+          }
+          50% { 
+            transform: translate(10px, -20px); 
+            opacity: 1;
+          }
+        }
+
+        @keyframes gridMove {
+          0% { transform: perspective(800px) rotateX(60deg) translateY(0); }
+          100% { transform: perspective(800px) rotateX(60deg) translateY(60px); }
         }
 
         @media (max-width: 768px) {
-          .hero-visual {
-            display: none;
+          h1 {
+            font-size: 2.5rem !important;
           }
         }
       `}</style>
