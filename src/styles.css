@@ -5,14 +5,25 @@
 }
 
 :root {
-  /* Colores principales */
-  --azul-profundo: #1E3A8A;
-  --turquesa: #06B6D4;
-  --oro: #F59E0B;
+  /* Colores corporativos CORRECTOS - Comercial Colombiana */
+  --azul-corporativo: #003B71;
+  --azul-oscuro: #001F3F;
+  --azul-claro: #E8F4F8;
+  --dorado: #FFB81C;
+  --dorado-hover: #E5A519;
+  
+  /* Neutrales */
   --gris-oscuro: #1F2937;
   --gris-medio: #6B7280;
+  --gris-texto: #666666;
   --gris-claro: #F3F4F6;
   --blanco: #FFFFFF;
+  --negro: #000000;
+  
+  /* Alias para compatibilidad con componentes existentes */
+  --azul-profundo: var(--azul-corporativo);
+  --turquesa: var(--azul-corporativo);
+  --oro: var(--dorado);
 }
 
 body {
@@ -46,24 +57,24 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--turquesa) 0%, var(--azul-profundo) 100%);
-  color: white;
-  box-shadow: 0 10px 25px rgba(6, 182, 212, 0.3);
+  background: linear-gradient(135deg, var(--dorado) 0%, var(--dorado-hover) 100%);
+  color: var(--blanco);
+  box-shadow: 0 10px 25px rgba(255, 184, 28, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 15px 35px rgba(6, 182, 212, 0.4);
+  box-shadow: 0 15px 35px rgba(255, 184, 28, 0.4);
 }
 
 .btn-secondary {
   background: white;
-  color: var(--azul-profundo);
-  border: 2px solid var(--azul-profundo);
+  color: var(--azul-corporativo);
+  border: 2px solid var(--azul-corporativo);
 }
 
 .btn-secondary:hover {
-  background: var(--azul-profundo);
+  background: var(--azul-corporativo);
   color: white;
 }
 
@@ -76,7 +87,7 @@ body {
   font-weight: 800;
   text-align: center;
   margin-bottom: 1rem;
-  color: var(--azul-profundo);
+  color: var(--azul-corporativo);
 }
 
 .section-subtitle {
