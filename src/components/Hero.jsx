@@ -8,7 +8,6 @@ const Hero = () => {
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    // Generar hexágonos con posiciones
     const newHexagons = Array.from({ length: 10 }, (_, i) => ({
       id: i,
       x: Math.random() * 90 + 5,
@@ -20,7 +19,6 @@ const Hero = () => {
     }));
     setHexagons(newHexagons);
 
-    // Seguir el mouse suavemente
     const handleMouseMove = (e) => {
       setMousePosition({
         x: (e.clientX / window.innerWidth) * 12 - 6,
@@ -29,7 +27,6 @@ const Hero = () => {
     };
     window.addEventListener('mousemove', handleMouseMove);
 
-    // Animar números (count-up)
     if (!hasAnimated) {
       setHasAnimated(true);
       const duration = 2000;
@@ -63,7 +60,6 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [hasAnimated]);
 
-  // 6 Cards de servicios
   const serviceCards = [
     {
       icon: Car,
@@ -121,7 +117,6 @@ const Hero = () => {
       paddingTop: '80px',
       paddingBottom: '80px'
     }}>
-      {/* Grid animado sutil */}
       <div style={{
         position: 'absolute',
         inset: 0,
@@ -136,7 +131,6 @@ const Hero = () => {
         animation: 'gridMove 20s linear infinite'
       }} />
 
-      {/* Hexágonos flotantes */}
       <svg style={{
         position: 'absolute',
         inset: 0,
@@ -200,7 +194,6 @@ const Hero = () => {
         </div>
       ))}
 
-      {/* Luz siguiendo el mouse */}
       <div style={{
         position: 'absolute',
         inset: 0,
@@ -218,7 +211,6 @@ const Hero = () => {
           margin: '0 auto'
         }}>
           
-          {/* Título y subtítulo */}
           <div className="animate-fadeInUp" style={{ 
             color: 'white',
             textAlign: 'center',
@@ -249,7 +241,6 @@ const Hero = () => {
             </p>
           </div>
 
-          {/* Grid de 6 Cards */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -375,7 +366,6 @@ const Hero = () => {
             })}
           </div>
 
-          {/* Stats Bar */}
           <div style={{
             display: 'flex',
             justifyContent: 'center',
@@ -418,7 +408,6 @@ const Hero = () => {
             ))}
           </div>
 
-          {/* Indicador de scroll */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
