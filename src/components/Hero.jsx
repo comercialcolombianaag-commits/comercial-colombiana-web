@@ -60,35 +60,33 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [hasAnimated]);
 
-  const ServiceCard = ({ icon: Icon, title, description, link, badge, isHero, index }) => {
-    return (
-      
-        href={link}
-        className={'service-card' + (isHero ? ' hero-card' : '')}
-        style={{
-          animationDelay: (index * 0.1) + 's'
-        }}
-      >
-        {badge && (
-          <div className={'card-badge' + (isHero ? ' hero-badge' : '')}>
-            {badge}
-          </div>
-        )}
-        <div className={'icon-container' + (isHero ? ' hero-icon' : '')}>
-          <Icon size={isHero ? 48 : 40} color="#FFB81C" />
+  const ServiceCard = ({ icon: Icon, title, description, link, badge, isHero, index }) => (
+    
+      href={link}
+      className={'service-card' + (isHero ? ' hero-card' : '')}
+      style={{
+        animationDelay: (index * 0.1) + 's'
+      }}
+    >
+      {badge && (
+        <div className={'card-badge' + (isHero ? ' hero-badge' : '')}>
+          {badge}
         </div>
-        <h3 className={'card-title' + (isHero ? ' hero-title' : '')}>
-          {title}
-        </h3>
-        <p className="card-description">
-          {description}
-        </p>
-        <div className={'card-cta' + (isHero ? ' hero-cta' : '')}>
-          {isHero ? 'Iniciar Análisis Gratuito' : 'Ver opciones'} →
-        </div>
-      </a>
-    );
-  };
+      )}
+      <div className={'icon-container' + (isHero ? ' hero-icon' : '')}>
+        <Icon size={isHero ? 48 : 40} color="#FFB81C" />
+      </div>
+      <h3 className={'card-title' + (isHero ? ' hero-title' : '')}>
+        {title}
+      </h3>
+      <p className="card-description">
+        {description}
+      </p>
+      <div className={'card-cta' + (isHero ? ' hero-cta' : '')}>
+        {isHero ? 'Iniciar Análisis Gratuito' : 'Ver opciones'} →
+      </div>
+    </a>
+  );
 
   return (
     <section id="inicio" className="hero-section">
