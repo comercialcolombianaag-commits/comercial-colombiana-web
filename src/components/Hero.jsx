@@ -297,7 +297,6 @@ const Hero = () => {
                     e.currentTarget.style.boxShadow = isHeroCard ? '0 0 0 0 rgba(255, 184, 28, 0.7)' : 'none';
                   }}
                 >
-                  {/* Badge */}
                   {card.badge && (
                     <div style={{
                       position: 'absolute',
@@ -305,7 +304,7 @@ const Hero = () => {
                       left: '50%',
                       transform: 'translateX(-50%)',
                       background: isHeroCard ? '#FFB81C' : 'rgba(0, 59, 113, 0.9)',
-                      color: isHeroCard ? '#fff' : '#fff',
+                      color: '#fff',
                       padding: '0.375rem 1.25rem',
                       borderRadius: '1.25rem',
                       fontSize: '0.75rem',
@@ -317,7 +316,6 @@ const Hero = () => {
                     </div>
                   )}
 
-                  {/* Icono */}
                   <div style={{
                     width: isHeroCard ? '80px' : '64px',
                     height: isHeroCard ? '80px' : '64px',
@@ -331,7 +329,6 @@ const Hero = () => {
                     <Icon size={isHeroCard ? 48 : 40} color="#FFB81C" />
                   </div>
 
-                  {/* Título */}
                   <h3 style={{
                     fontSize: isHeroCard ? '1.75rem' : '1.5rem',
                     fontWeight: '700',
@@ -341,7 +338,6 @@ const Hero = () => {
                     {card.title}
                   </h3>
 
-                  {/* Descripción */}
                   <p style={{
                     fontSize: '0.9375rem',
                     color: 'rgba(255, 255, 255, 0.85)',
@@ -351,26 +347,27 @@ const Hero = () => {
                     {card.description}
                   </p>
 
-                  {/* CTA (solo visible en hover, excepto hero card) */}
-                  <div style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    background: isHeroCard 
-                      ? 'linear-gradient(135deg, #FFB81C 0%, #E5A519 100%)'
-                      : 'linear-gradient(135deg, #003B71 0%, #002A54 100%)',
-                    color: 'white',
-                    padding: '0.75rem 1.5rem',
-                    borderRadius: '3rem',
-                    fontSize: '0.875rem',
-                    fontWeight: '600',
-                    opacity: isHeroCard ? 1 : 0,
-                    transform: isHeroCard ? 'translateY(0)' : 'translateY(10px)',
-                    transition: 'all 0.3s ease',
-                    boxShadow: isHeroCard ? '0 0 20px rgba(255, 184, 28, 0.5)' : 'none',
-                    animation: isHeroCard ? 'cta-glow 2s ease-in-out infinite' : 'none'
-                  }}
-                  className="card-cta">
+                  <div 
+                    className="card-cta"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      background: isHeroCard 
+                        ? 'linear-gradient(135deg, #FFB81C 0%, #E5A519 100%)'
+                        : 'linear-gradient(135deg, #003B71 0%, #002A54 100%)',
+                      color: 'white',
+                      padding: '0.75rem 1.5rem',
+                      borderRadius: '3rem',
+                      fontSize: '0.875rem',
+                      fontWeight: '600',
+                      opacity: isHeroCard ? 1 : 0,
+                      transform: isHeroCard ? 'translateY(0)' : 'translateY(10px)',
+                      transition: 'all 0.3s ease',
+                      boxShadow: isHeroCard ? '0 0 20px rgba(255, 184, 28, 0.5)' : 'none',
+                      animation: isHeroCard ? 'cta-glow 2s ease-in-out infinite' : 'none'
+                    }}
+                  >
                     {isHeroCard ? 'Iniciar Análisis Gratuito' : 'Ver opciones'} →
                   </div>
                 </a>
