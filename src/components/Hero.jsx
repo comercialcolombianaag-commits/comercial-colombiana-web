@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Shield, ArrowRight, Users, Award, ChevronDown } from 'lucide-react';
+import { Shield, ArrowRight, Users, Award, ChevronDown, Car, Heart, Home, Building2, Briefcase, Target } from 'lucide-react';
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [hexagons, setHexagons] = useState([]);
-  const [stats, setStats] = useState({ years: 0, insurers: 0, clients: 0 });
+  const [stats, setStats] = useState({ years: 0, policies: 0, clients: 0, insurers: 0 });
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
@@ -32,12 +32,13 @@ const Hero = () => {
     // Animar números (count-up)
     if (!hasAnimated) {
       setHasAnimated(true);
-      const duration = 2000; // 2 segundos
+      const duration = 2000;
       const steps = 60;
       const increment = {
         years: 50 / steps,
-        insurers: 22 / steps,
-        clients: 150 / steps
+        policies: 1400 / steps,
+        clients: 100 / steps,
+        insurers: 22 / steps
       };
 
       let currentStep = 0;
@@ -45,8 +46,9 @@ const Hero = () => {
         currentStep++;
         setStats({
           years: Math.min(Math.floor(increment.years * currentStep), 50),
-          insurers: Math.min(Math.floor(increment.insurers * currentStep), 22),
-          clients: Math.min(Math.floor(increment.clients * currentStep), 150)
+          policies: Math.min(Math.floor(increment.policies * currentStep), 1400),
+          clients: Math.min(Math.floor(increment.clients * currentStep), 100),
+          insurers: Math.min(Math.floor(increment.insurers * currentStep), 22)
         });
 
         if (currentStep >= steps) clearInterval(timer);
@@ -61,22 +63,71 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [hasAnimated]);
 
+  // 6 Cards de servicios
+  const serviceCards = [
+    {
+      icon: Car,
+      title: 'Auto',
+      description: 'SOAT, Todo Riesgo, RC para vehículos particulares y flotillas',
+      link: '#auto',
+      badge: null
+    },
+    {
+      icon: Target,
+      title: 'Análisis de Riesgos',
+      description: '¿No sabes por dónde empezar? Descubre tus riesgos en 2 minutos',
+      link: '#analisis',
+      badge: '⭐ RECOMENDADO',
+      isHero: true
+    },
+    {
+      icon: Heart,
+      title: 'Salud',
+      description: 'EPS, Medicina Prepagada, Pólizas Complementarias',
+      link: '#salud',
+      badge: null
+    },
+    {
+      icon: Building2,
+      title: 'Mi Empresa',
+      description: 'Soluciones integrales para PyMEs y empresas medianas',
+      link: '#empresa',
+      badge: 'EMPRESAS'
+    },
+    {
+      icon: Briefcase,
+      title: 'Mis Empleados',
+      description: 'Vida Grupo, Salud Empresarial, ARL, Accidentes',
+      link: '#empleados',
+      badge: 'EMPRESAS'
+    },
+    {
+      icon: Home,
+      title: 'Hogar',
+      description: 'Todo Riesgo, Incendio, RC. Protege tu patrimonio',
+      link: '#hogar',
+      badge: null
+    }
+  ];
+
   return (
     <section id="inicio" style={{
       position: 'relative',
       minHeight: '100vh',
       display: 'flex',
       alignItems: 'center',
-      background: 'linear-gradient(135deg, #1E3A8A 0%, #0f1b47 50%, #000000 100%)',
-      overflow: 'hidden'
+      background: 'linear-gradient(135deg, #001F3F 0%, #003B71 50%, #001F3F 100%)',
+      overflow: 'hidden',
+      paddingTop: '80px',
+      paddingBottom: '80px'
     }}>
       {/* Grid animado sutil */}
       <div style={{
         position: 'absolute',
         inset: 0,
         backgroundImage: `
-          linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px)
+          linear-gradient(rgba(255, 184, 28, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 184, 28, 0.03) 1px, transparent 1px)
         `,
         backgroundSize: '60px 60px',
         transform: 'perspective(800px) rotateX(60deg)',
@@ -85,7 +136,7 @@ const Hero = () => {
         animation: 'gridMove 20s linear infinite'
       }} />
 
-      {/* Hexágonos flotantes conectados */}
+      {/* Hexágonos flotantes */}
       <svg style={{
         position: 'absolute',
         inset: 0,
@@ -93,7 +144,6 @@ const Hero = () => {
         height: '100%',
         pointerEvents: 'none'
       }}>
-        {/* Líneas de conexión entre hexágonos */}
         {hexagons.map((hex, i) => 
           hexagons.slice(i + 1).map((otherHex, j) => {
             const distance = Math.sqrt(
@@ -107,7 +157,7 @@ const Hero = () => {
                   y1={`${hex.y}%`}
                   x2={`${otherHex.x}%`}
                   y2={`${otherHex.y}%`}
-                  stroke="rgba(6, 182, 212, 0.2)"
+                  stroke="rgba(255, 184, 28, 0.15)"
                   strokeWidth="1"
                   style={{
                     animation: 'fadeInOut 3s ease-in-out infinite',
@@ -121,7 +171,6 @@ const Hero = () => {
         )}
       </svg>
 
-      {/* Hexágonos */}
       {hexagons.map(hex => (
         <div
           key={hex.id}
@@ -141,360 +190,256 @@ const Hero = () => {
             <polygon
               points="50 1 95 25 95 75 50 99 5 75 5 25"
               fill="none"
-              stroke="rgba(6, 182, 212, 0.4)"
+              stroke="rgba(255, 184, 28, 0.3)"
               strokeWidth="1.5"
               style={{
-                filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.3))'
+                filter: 'drop-shadow(0 0 8px rgba(255, 184, 28, 0.2))'
               }}
             />
           </svg>
         </div>
       ))}
 
-      {/* Círculos concéntricos animados */}
-      <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '800px',
-        height: '800px',
-        pointerEvents: 'none'
-      }}>
-        {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              borderRadius: '50%',
-              border: '1px solid rgba(6, 182, 212, 0.1)',
-              animation: `ripple ${4 + i}s ease-out infinite`,
-              animationDelay: `${i * 0.8}s`
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Líneas de datos cruzando */}
+      {/* Luz siguiendo el mouse */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        overflow: 'hidden',
-        pointerEvents: 'none'
-      }}>
-        {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            style={{
-              position: 'absolute',
-              left: '-100%',
-              top: `${20 * i}%`,
-              width: '100%',
-              height: '1px',
-              background: 'linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.3), transparent)',
-              animation: `dataLine ${8 + i * 2}s linear infinite`,
-              animationDelay: `${i * 1.5}s`
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Luz suave siguiendo el mouse */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        background: `radial-gradient(500px circle at ${50 + mousePosition.x}% ${50 + mousePosition.y}%, rgba(6, 182, 212, 0.08), transparent 50%)`,
+        background: `radial-gradient(500px circle at ${50 + mousePosition.x}% ${50 + mousePosition.y}%, rgba(255, 184, 28, 0.06), transparent 50%)`,
         pointerEvents: 'none',
         transition: 'background 0.3s ease'
       }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr',
-          gap: '3rem',
-          alignItems: 'center',
-          textAlign: 'center',
-          maxWidth: '1100px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '4rem',
+          maxWidth: '1400px',
           margin: '0 auto'
         }}>
-          {/* Contenido principal */}
-          <div className="animate-fadeInUp" style={{ color: 'white' }}>
-            
-            {/* Badge con pulso */}
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.75rem',
-              background: 'rgba(6, 182, 212, 0.08)',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(6, 182, 212, 0.2)',
-              padding: '0.75rem 1.75rem',
-              borderRadius: '3rem',
-              fontSize: '0.9375rem',
-              fontWeight: '600',
-              marginBottom: '2.5rem',
-              boxShadow: '0 4px 20px rgba(6, 182, 212, 0.1)'
-            }}>
-              <div style={{
-                width: '8px',
-                height: '8px',
-                background: '#10B981',
-                borderRadius: '50%',
-                boxShadow: '0 0 10px #10B981',
-                animation: 'pulse 2s ease-in-out infinite'
-              }} />
-              <span style={{ color: '#E0F2FE' }}>Más de 50 años protegiendo a Colombia</span>
-            </div>
-
-            {/* Título principal */}
+          
+          {/* Título y subtítulo */}
+          <div className="animate-fadeInUp" style={{ 
+            color: 'white',
+            textAlign: 'center',
+            maxWidth: '900px',
+            margin: '0 auto'
+          }}>
             <h1 style={{
-              fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+              fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
               fontWeight: '800',
-              lineHeight: '1.15',
+              lineHeight: '1.2',
               marginBottom: '1.5rem',
-              letterSpacing: '-0.02em'
+              background: 'linear-gradient(135deg, #003B71 0%, #FFB81C 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
             }}>
-              <span style={{
-                display: 'block',
-                color: 'white',
-                marginBottom: '0.75rem'
-              }}>
-                Tecnología al servicio
-              </span>
-              <span style={{
-                display: 'block',
-                background: 'linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                position: 'relative'
-              }}>
-                de tu tranquilidad
-              </span>
+              ¿Qué necesitas proteger hoy?
             </h1>
 
-            {/* Subtítulo */}
             <p style={{
               fontSize: 'clamp(1.125rem, 2vw, 1.375rem)',
-              marginBottom: '3rem',
-              color: '#CBD5E1',
+              color: 'rgba(255, 255, 255, 0.9)',
               lineHeight: '1.7',
-              maxWidth: '750px',
-              margin: '0 auto 3rem',
-              fontWeight: '400'
+              marginBottom: '0'
             }}>
-              Protegemos tu patrimonio, familia y empresa con asesoría experta 
-              y las mejores soluciones del mercado. Sin letra pequeña, sin sorpresas.
+              Encuentra la protección perfecta para ti, tu familia o tu empresa. 
+              Más de 50 años cuidando lo que más valoras en Bogotá.
             </p>
+          </div>
 
-            {/* CTAs con efecto scanner holográfico */}
-            <div style={{
-              display: 'flex',
-              gap: '1.25rem',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              marginBottom: '2rem'
-            }}>
-              {/* CTA Principal - Efecto holográfico */}
-              <a href="#test" style={{
-                position: 'relative',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.75rem',
-                padding: '1.25rem 2.5rem',
-                fontSize: '1.125rem',
-                fontWeight: '700',
-                background: 'linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)',
-                color: 'white',
-                borderRadius: '0.875rem',
-                textDecoration: 'none',
-                boxShadow: '0 8px 30px rgba(6, 182, 212, 0.35)',
-                transition: 'all 0.3s ease',
-                overflow: 'hidden'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-3px)';
-                e.currentTarget.style.boxShadow = '0 12px 40px rgba(6, 182, 212, 0.5)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 8px 30px rgba(6, 182, 212, 0.35)';
-              }}>
-                {/* Efecto scanner animado */}
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: '-100%',
-                  width: '100%',
-                  height: '100%',
-                  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
-                  animation: 'scanner 3s ease-in-out infinite'
-                }} />
+          {/* Grid de 6 Cards */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '1.5rem',
+            animation: 'fadeIn 1s ease-out 0.3s backwards'
+          }}>
+            {serviceCards.map((card, index) => {
+              const Icon = card.icon;
+              const isHeroCard = card.isHero;
+              
+              return (
                 
-                <Shield size={22} style={{ position: 'relative', zIndex: 1 }} />
-                <span style={{ position: 'relative', zIndex: 1 }}>Analizar mi Nivel de Protección</span>
-                <ArrowRight size={22} style={{ position: 'relative', zIndex: 1 }} />
-              </a>
+                  key={index}
+                  href={card.link}
+                  style={{
+                    position: 'relative',
+                    background: isHeroCard 
+                      ? 'linear-gradient(135deg, rgba(255, 184, 28, 0.25) 0%, rgba(0, 59, 113, 0.25) 100%)'
+                      : 'rgba(0, 59, 113, 0.15)',
+                    backdropFilter: 'blur(20px)',
+                    border: isHeroCard 
+                      ? '3px solid #FFB81C' 
+                      : '2px solid rgba(0, 59, 113, 0.4)',
+                    borderRadius: '1.5rem',
+                    padding: '2.5rem 2rem',
+                    textAlign: 'center',
+                    textDecoration: 'none',
+                    color: 'white',
+                    transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                    cursor: 'pointer',
+                    overflow: 'hidden',
+                    animation: `fadeInUp 0.8s ease ${index * 0.1}s backwards`,
+                    boxShadow: isHeroCard 
+                      ? '0 0 0 0 rgba(255, 184, 28, 0.7)'
+                      : 'none'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-15px) scale(1.02)';
+                    e.currentTarget.style.borderColor = '#FFB81C';
+                    e.currentTarget.style.boxShadow = '0 20px 60px rgba(255, 184, 28, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                    e.currentTarget.style.borderColor = isHeroCard ? '#FFB81C' : 'rgba(0, 59, 113, 0.4)';
+                    e.currentTarget.style.boxShadow = isHeroCard ? '0 0 0 0 rgba(255, 184, 28, 0.7)' : 'none';
+                  }}
+                >
+                  {/* Badge */}
+                  {card.badge && (
+                    <div style={{
+                      position: 'absolute',
+                      top: '-12px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      background: isHeroCard ? '#FFB81C' : 'rgba(0, 59, 113, 0.9)',
+                      color: isHeroCard ? '#fff' : '#fff',
+                      padding: '0.375rem 1.25rem',
+                      borderRadius: '1.25rem',
+                      fontSize: '0.75rem',
+                      fontWeight: '700',
+                      letterSpacing: '0.5px',
+                      whiteSpace: 'nowrap'
+                    }}>
+                      {card.badge}
+                    </div>
+                  )}
 
-              {/* CTA Secundario */}
-              <a href="#contacto" style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.75rem',
-                padding: '1.25rem 2.5rem',
-                fontSize: '1.125rem',
-                fontWeight: '600',
-                background: 'rgba(255, 255, 255, 0.05)',
-                backdropFilter: 'blur(10px)',
-                color: 'white',
-                borderRadius: '0.875rem',
-                textDecoration: 'none',
-                border: '1.5px solid rgba(6, 182, 212, 0.3)',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(6, 182, 212, 0.15)';
-                e.currentTarget.style.borderColor = '#06B6D4';
-                e.currentTarget.style.transform = 'translateY(-3px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                e.currentTarget.style.borderColor = 'rgba(6, 182, 212, 0.3)';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}>
-                Contactar Asesor
-              </a>
-            </div>
-
-            {/* Indicador de scroll */}
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '0.75rem',
-              marginBottom: '3rem',
-              animation: 'bounce 2s ease-in-out infinite'
-            }}>
-              <span style={{
-                fontSize: '0.875rem',
-                color: '#94A3B8',
-                fontWeight: '500'
-              }}>
-                Conoce más sobre nuestros servicios
-              </span>
-              <ChevronDown size={24} style={{ color: '#06B6D4' }} />
-            </div>
-
-            {/* Stats con count-up */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-              gap: '2.5rem',
-              maxWidth: '900px',
-              margin: '0 auto',
-              padding: '3rem 2rem',
-              background: 'rgba(255, 255, 255, 0.03)',
-              backdropFilter: 'blur(20px)',
-              borderRadius: '1.5rem',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)'
-            }}>
-              {[
-                { 
-                  icon: Award, 
-                  number: stats.years,
-                  suffix: '+',
-                  label: 'Años de experiencia',
-                  color: '#F59E0B'
-                },
-                { 
-                  icon: Shield, 
-                  number: stats.insurers,
-                  suffix: '',
-                  label: 'Aseguradoras aliadas',
-                  color: '#06B6D4'
-                },
-                { 
-                  icon: Users, 
-                  number: stats.clients,
-                  suffix: '+',
-                  label: 'Clientes activos',
-                  color: '#10B981'
-                }
-              ].map((stat, idx) => {
-                const Icon = stat.icon;
-                return (
-                  <div key={idx} style={{
+                  {/* Icono */}
+                  <div style={{
+                    width: isHeroCard ? '80px' : '64px',
+                    height: isHeroCard ? '80px' : '64px',
+                    margin: '0 auto 1.5rem',
                     display: 'flex',
-                    flexDirection: 'column',
                     alignItems: 'center',
-                    gap: '0.75rem'
+                    justifyContent: 'center',
+                    filter: 'drop-shadow(0 5px 15px rgba(255, 184, 28, 0.3))',
+                    animation: isHeroCard ? 'bounce 2s ease-in-out infinite' : 'none'
                   }}>
-                    <div style={{
-                      width: '50px',
-                      height: '50px',
-                      background: `${stat.color}15`,
-                      borderRadius: '0.75rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      border: `1px solid ${stat.color}40`,
-                      marginBottom: '0.5rem'
-                    }}>
-                      <Icon size={24} style={{ color: stat.color }} />
-                    </div>
-                    <div style={{
-                      fontSize: '2.25rem',
-                      fontWeight: '800',
-                      color: stat.color,
-                      lineHeight: '1',
-                      textShadow: `0 0 20px ${stat.color}40`,
-                      fontVariantNumeric: 'tabular-nums'
-                    }}>
-                      {stat.number}{stat.suffix}
-                    </div>
-                    <div style={{
-                      fontSize: '0.9375rem',
-                      color: '#94A3B8',
-                      textAlign: 'center',
-                      lineHeight: '1.4'
-                    }}>
-                      {stat.label}
-                    </div>
+                    <Icon size={isHeroCard ? 48 : 40} color="#FFB81C" />
                   </div>
-                );
-              })}
-            </div>
+
+                  {/* Título */}
+                  <h3 style={{
+                    fontSize: isHeroCard ? '1.75rem' : '1.5rem',
+                    fontWeight: '700',
+                    marginBottom: '1rem',
+                    color: '#FFB81C'
+                  }}>
+                    {card.title}
+                  </h3>
+
+                  {/* Descripción */}
+                  <p style={{
+                    fontSize: '0.9375rem',
+                    color: 'rgba(255, 255, 255, 0.85)',
+                    lineHeight: '1.6',
+                    marginBottom: '1.25rem'
+                  }}>
+                    {card.description}
+                  </p>
+
+                  {/* CTA (solo visible en hover, excepto hero card) */}
+                  <div style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    background: isHeroCard 
+                      ? 'linear-gradient(135deg, #FFB81C 0%, #E5A519 100%)'
+                      : 'linear-gradient(135deg, #003B71 0%, #002A54 100%)',
+                    color: 'white',
+                    padding: '0.75rem 1.5rem',
+                    borderRadius: '3rem',
+                    fontSize: '0.875rem',
+                    fontWeight: '600',
+                    opacity: isHeroCard ? 1 : 0,
+                    transform: isHeroCard ? 'translateY(0)' : 'translateY(10px)',
+                    transition: 'all 0.3s ease',
+                    boxShadow: isHeroCard ? '0 0 20px rgba(255, 184, 28, 0.5)' : 'none',
+                    animation: isHeroCard ? 'cta-glow 2s ease-in-out infinite' : 'none'
+                  }}
+                  className="card-cta">
+                    {isHeroCard ? 'Iniciar Análisis Gratuito' : 'Ver opciones'} →
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+
+          {/* Stats Bar */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '4rem',
+            flexWrap: 'wrap',
+            padding: '2.5rem 2rem',
+            background: 'rgba(0, 59, 113, 0.15)',
+            backdropFilter: 'blur(20px)',
+            borderRadius: '1.5rem',
+            border: '1px solid rgba(255, 184, 28, 0.3)',
+            marginTop: '2rem'
+          }}>
+            {[
+              { number: stats.years, suffix: '+', label: 'Años de experiencia' },
+              { number: stats.policies, suffix: '+', label: 'Pólizas emitidas al año' },
+              { number: stats.clients, suffix: '+', label: 'Empresas que confían' },
+              { number: stats.insurers, suffix: '', label: 'Aseguradoras aliadas' }
+            ].map((stat, idx) => (
+              <div key={idx} style={{
+                textAlign: 'center',
+                minWidth: '150px'
+              }}>
+                <div style={{
+                  fontSize: '3rem',
+                  fontWeight: '900',
+                  color: '#FFB81C',
+                  lineHeight: '1',
+                  marginBottom: '0.5rem',
+                  fontVariantNumeric: 'tabular-nums'
+                }}>
+                  {stat.number}{stat.suffix}
+                </div>
+                <div style={{
+                  fontSize: '1rem',
+                  color: 'rgba(255, 255, 255, 0.8)'
+                }}>
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Indicador de scroll */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '0.75rem',
+            animation: 'bounce 2s ease-in-out infinite',
+            marginTop: '2rem'
+          }}>
+            <span style={{
+              fontSize: '0.875rem',
+              color: 'rgba(255, 255, 255, 0.7)',
+              fontWeight: '500'
+            }}>
+              Descubre más sobre nuestros servicios
+            </span>
+            <ChevronDown size={24} style={{ color: '#FFB81C' }} />
           </div>
         </div>
-      </div>
-
-      {/* Onda decorativa inferior */}
-      <div style={{
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: '100px'
-      }}>
-        <svg
-          viewBox="0 0 1440 100"
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            width: '100%',
-            height: '100%'
-          }}
-          preserveAspectRatio="none"
-        >
-          <path
-            fill="#ffffff"
-            fillOpacity="1"
-            d="M0,50L48,45C96,40,192,30,288,35C384,40,480,60,576,65C672,70,768,60,864,55C960,50,1056,50,1152,55C1248,60,1344,70,1392,75L1440,80L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"
-          />
-        </svg>
       </div>
 
       <style>{`
@@ -513,24 +458,20 @@ const Hero = () => {
           50% { opacity: 0.4; }
         }
 
-        @keyframes ripple {
-          0% { transform: scale(0.8); opacity: 0.6; }
-          100% { transform: scale(1.5); opacity: 0; }
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
-        @keyframes dataLine {
-          0% { left: -100%; }
-          100% { left: 100%; }
-        }
-
-        @keyframes scanner {
-          0% { left: -100%; }
-          100% { left: 200%; }
-        }
-
-        @keyframes pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.6; transform: scale(0.9); }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
 
         @keyframes bounce {
@@ -538,9 +479,19 @@ const Hero = () => {
           50% { transform: translateY(-10px); }
         }
 
+        @keyframes cta-glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(255, 184, 28, 0.5); }
+          50% { box-shadow: 0 0 30px rgba(255, 184, 28, 0.8); }
+        }
+
+        a:hover .card-cta {
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+        }
+
         @media (max-width: 768px) {
           h1 {
-            font-size: 2.5rem !important;
+            font-size: 2rem !important;
           }
         }
       `}</style>
