@@ -55,16 +55,50 @@ const Testimonials = () => {
 
   return (
     <section className="section" style={{
-      background: 'linear-gradient(to bottom, #F9FAFB, white)',
+      padding: '5rem 0',
+      background: 'linear-gradient(180deg, #FFFFFF 0%, #F3F4F6 100%)',
       position: 'relative'
     }}>
       <div className="container">
         <div className="animate-fadeInUp" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 className="section-title">
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            background: 'linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(74, 144, 226, 0.1) 100%)',
+            padding: '0.5rem 1.5rem',
+            borderRadius: '2rem',
+            marginBottom: '1.5rem',
+            border: '1px solid rgba(0, 102, 204, 0.2)'
+          }}>
+            <Quote size={18} color="#0066CC" />
+            <span style={{
+              fontSize: '0.875rem',
+              fontWeight: '700',
+              color: '#0066CC',
+              letterSpacing: '0.5px'
+            }}>
+              TESTIMONIOS
+            </span>
+          </div>
+
+          <h2 style={{
+            fontSize: 'clamp(2rem, 4vw, 2.75rem)',
+            fontWeight: '800',
+            color: '#1F2937',
+            marginBottom: '1.5rem',
+            lineHeight: '1.2'
+          }}>
             Lo que nuestros clientes dicen de nosotros
           </h2>
-          <p className="section-subtitle">
-            Más de 50 años construyendo relaciones de confianza
+          <p style={{
+            fontSize: '1.125rem',
+            color: '#6B7280',
+            lineHeight: '1.7',
+            maxWidth: '600px',
+            margin: '0 auto'
+          }}>
+            Más de 50 años construyendo relaciones de confianza con empresas líderes
           </p>
         </div>
 
@@ -85,13 +119,13 @@ const Testimonials = () => {
                 transition: 'all 0.3s ease',
                 animationDelay: `${idx * 0.1}s`,
                 cursor: 'pointer',
-                border: '1px solid transparent',
+                border: '2px solid transparent',
                 position: 'relative'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px)';
-                e.currentTarget.style.boxShadow = '0 15px 35px rgba(0,0,0,0.12)';
-                e.currentTarget.style.borderColor = '#06B6D4';
+                e.currentTarget.style.transform = 'translateY(-8px)';
+                e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 102, 204, 0.15)';
+                e.currentTarget.style.borderColor = '#4A90E2';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
@@ -99,17 +133,25 @@ const Testimonials = () => {
                 e.currentTarget.style.borderColor = 'transparent';
               }}
             >
-              {/* Icono de comillas */}
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '4px',
+                background: 'linear-gradient(90deg, #0066CC 0%, #4A90E2 100%)',
+                borderRadius: '1.5rem 1.5rem 0 0'
+              }} />
+
               <div style={{
                 position: 'absolute',
                 top: '1.5rem',
                 right: '1.5rem',
-                opacity: 0.1
+                opacity: 0.08
               }}>
-                <Quote size={60} style={{ color: '#06B6D4' }} />
+                <Quote size={60} style={{ color: '#0066CC' }} />
               </div>
 
-              {/* Rating */}
               <div style={{
                 display: 'flex',
                 gap: '0.25rem',
@@ -119,13 +161,12 @@ const Testimonials = () => {
                   <Star
                     key={i}
                     size={18}
-                    fill="#F59E0B"
-                    style={{ color: '#F59E0B' }}
+                    fill="#4A90E2"
+                    style={{ color: '#4A90E2' }}
                   />
                 ))}
               </div>
 
-              {/* Texto del testimonio */}
               <p style={{
                 fontSize: '0.9375rem',
                 lineHeight: '1.7',
@@ -137,7 +178,6 @@ const Testimonials = () => {
                 "{testimonial.text}"
               </p>
 
-              {/* Información del autor */}
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -149,7 +189,7 @@ const Testimonials = () => {
                   width: '50px',
                   height: '50px',
                   borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #06B6D4 0%, #1E3A8A 100%)',
+                  background: 'linear-gradient(135deg, #0066CC 0%, #4A90E2 100%)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -175,7 +215,7 @@ const Testimonials = () => {
                   </div>
                   <div style={{
                     fontSize: '0.8125rem',
-                    color: '#06B6D4',
+                    color: '#0066CC',
                     fontWeight: '600'
                   }}>
                     {testimonial.company}
@@ -186,14 +226,13 @@ const Testimonials = () => {
           ))}
         </div>
 
-        {/* Stats de confianza */}
         <div style={{
           marginTop: '4rem',
           padding: '3rem',
           background: 'white',
           borderRadius: '1.5rem',
           boxShadow: '0 10px 40px rgba(0,0,0,0.08)',
-          border: '1px solid #E5E7EB'
+          border: '2px solid rgba(0, 102, 204, 0.1)'
         }}>
           <div style={{
             display: 'grid',
@@ -205,7 +244,7 @@ const Testimonials = () => {
               <div style={{
                 fontSize: '3rem',
                 fontWeight: '900',
-                background: 'linear-gradient(135deg, #06B6D4 0%, #1E3A8A 100%)',
+                background: 'linear-gradient(135deg, #0066CC 0%, #4A90E2 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -226,7 +265,7 @@ const Testimonials = () => {
               <div style={{
                 fontSize: '3rem',
                 fontWeight: '900',
-                background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+                background: 'linear-gradient(135deg, #4A90E2 0%, #0066CC 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -247,7 +286,7 @@ const Testimonials = () => {
               <div style={{
                 fontSize: '3rem',
                 fontWeight: '900',
-                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                background: 'linear-gradient(135deg, #0066CC 0%, #003B71 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -268,7 +307,7 @@ const Testimonials = () => {
               <div style={{
                 fontSize: '3rem',
                 fontWeight: '900',
-                background: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)',
+                background: 'linear-gradient(135deg, #4A90E2 0%, #003B71 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
