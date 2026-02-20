@@ -6,7 +6,7 @@ const Footer = () => {
 
   return (
     <footer style={{
-      background: 'linear-gradient(135deg, #1F2937 0%, #111827 100%)',
+      background: 'linear-gradient(135deg, #001F3F 0%, #003B71 100%)',
       color: 'white',
       paddingTop: '4rem',
       paddingBottom: '2rem'
@@ -24,7 +24,7 @@ const Footer = () => {
               fontSize: '1.5rem',
               fontWeight: '800',
               marginBottom: '1rem',
-              background: 'linear-gradient(135deg, #06B6D4 0%, #F59E0B 100%)',
+              background: 'linear-gradient(135deg, #4A90E2 0%, #FFFFFF 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
@@ -33,7 +33,7 @@ const Footer = () => {
             </div>
             <div style={{
               fontSize: '0.875rem',
-              color: '#F59E0B',
+              color: '#4A90E2',
               fontWeight: '600',
               marginBottom: '1rem'
             }}>
@@ -42,7 +42,7 @@ const Footer = () => {
             <p style={{
               fontSize: '0.9375rem',
               lineHeight: '1.7',
-              color: '#D1D5DB',
+              color: 'rgba(255, 255, 255, 0.8)',
               marginBottom: '1.5rem'
             }}>
               Agencia de seguros en Bogotá con más de 50 años de experiencia protegiendo lo más valioso de nuestros clientes.
@@ -58,7 +58,7 @@ const Footer = () => {
                 { Icon: Instagram, href: '#' },
                 { Icon: Linkedin, href: 'https://www.linkedin.com/company/comercial-colombiana-agencia-de-seguros' }
               ].map((social, idx) => (
-                <a
+                
                   key={idx}
                   href={social.href}
                   target="_blank"
@@ -67,20 +67,22 @@ const Footer = () => {
                     width: '40px',
                     height: '40px',
                     borderRadius: '50%',
-                    background: 'rgba(255,255,255,0.1)',
+                    background: 'rgba(74, 144, 226, 0.2)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     transition: 'all 0.3s ease',
-                    border: '1px solid rgba(255,255,255,0.2)'
+                    border: '1px solid rgba(74, 144, 226, 0.3)'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = '#06B6D4';
+                    e.currentTarget.style.background = '#4A90E2';
                     e.currentTarget.style.transform = 'translateY(-3px)';
+                    e.currentTarget.style.boxShadow = '0 10px 20px rgba(74, 144, 226, 0.3)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+                    e.currentTarget.style.background = 'rgba(74, 144, 226, 0.2)';
                     e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
                   <social.Icon size={18} />
@@ -106,25 +108,32 @@ const Footer = () => {
               gap: '0.75rem'
             }}>
               {[
-                'Seguros para Personas',
-                'Seguros para Empresas',
-                'Fondos de Empleados',
-                'Asesoría Integral',
-                'Acompañamiento en Siniestros'
+                { text: 'Seguros para Personas', href: '/seguros-para-personas' },
+                { text: 'Seguros para Empresas', href: '/seguros-para-empresas' },
+                { text: 'Fondos de Empleados', href: '/atencion-a-fondos-y-educacion' },
+                { text: 'Asesoría Integral', href: '/asesoria-integral-en-seguros' },
+                { text: 'Acompañamiento en Siniestros', href: '/acompanamiento-en-siniestros' }
               ].map((item, idx) => (
                 <li key={idx}>
-                  <a
-                    href="#seguros"
+                  
+                    href={item.href}
                     style={{
-                      color: '#D1D5DB',
+                      color: 'rgba(255, 255, 255, 0.8)',
                       textDecoration: 'none',
                       fontSize: '0.9375rem',
-                      transition: 'color 0.3s ease'
+                      transition: 'all 0.3s ease',
+                      display: 'inline-block'
                     }}
-                    onMouseEnter={(e) => e.target.style.color = '#06B6D4'}
-                    onMouseLeave={(e) => e.target.style.color = '#D1D5DB'}
+                    onMouseEnter={(e) => {
+                      e.target.style.color = '#4A90E2';
+                      e.target.style.paddingLeft = '0.5rem';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.color = 'rgba(255, 255, 255, 0.8)';
+                      e.target.style.paddingLeft = '0';
+                    }}
                   >
-                    {item}
+                    {item.text}
                   </a>
                 </li>
               ))}
@@ -148,23 +157,30 @@ const Footer = () => {
               gap: '0.75rem'
             }}>
               {[
-                { text: 'Quiénes somos', href: '#nosotros' },
-                { text: 'Nuestro equipo', href: '#nosotros' },
-                { text: 'Blog', href: '#blog' },
-                { text: 'Contacto', href: '#contacto' },
-                { text: 'Preguntas frecuentes', href: '#' }
+                { text: 'Quiénes somos', href: '/quienes-somos' },
+                { text: 'Nuestro equipo', href: '/quienes-somos#equipo' },
+                { text: 'Blog', href: '/blog' },
+                { text: 'Contacto', href: '/contacto' },
+                { text: 'Preguntas frecuentes', href: '/preguntas-frecuentes' }
               ].map((item, idx) => (
                 <li key={idx}>
-                  <a
+                  
                     href={item.href}
                     style={{
-                      color: '#D1D5DB',
+                      color: 'rgba(255, 255, 255, 0.8)',
                       textDecoration: 'none',
                       fontSize: '0.9375rem',
-                      transition: 'color 0.3s ease'
+                      transition: 'all 0.3s ease',
+                      display: 'inline-block'
                     }}
-                    onMouseEnter={(e) => e.target.style.color = '#06B6D4'}
-                    onMouseLeave={(e) => e.target.style.color = '#D1D5DB'}
+                    onMouseEnter={(e) => {
+                      e.target.style.color = '#4A90E2';
+                      e.target.style.paddingLeft = '0.5rem';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.color = 'rgba(255, 255, 255, 0.8)';
+                      e.target.style.paddingLeft = '0';
+                    }}
                   >
                     {item.text}
                   </a>
@@ -188,37 +204,37 @@ const Footer = () => {
               flexDirection: 'column',
               gap: '1rem'
             }}>
-              <a
+              
                 href="tel:+573156851089"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.75rem',
-                  color: '#D1D5DB',
+                  color: 'rgba(255, 255, 255, 0.8)',
                   textDecoration: 'none',
                   fontSize: '0.9375rem',
                   transition: 'color 0.3s ease'
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.color = '#06B6D4'}
-                onMouseLeave={(e) => e.currentTarget.style.color = '#D1D5DB'}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#4A90E2'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)'}
               >
                 <Phone size={18} />
                 <span>+57 (315) 685-1089</span>
               </a>
 
-              <a
+              
                 href="mailto:andres.arenas@comercialcolombiana.com"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.75rem',
-                  color: '#D1D5DB',
+                  color: 'rgba(255, 255, 255, 0.8)',
                   textDecoration: 'none',
                   fontSize: '0.9375rem',
                   transition: 'color 0.3s ease'
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.color = '#06B6D4'}
-                onMouseLeave={(e) => e.currentTarget.style.color = '#D1D5DB'}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#4A90E2'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)'}
               >
                 <Mail size={18} />
                 <span>andres.arenas@comercialcolombiana.com</span>
@@ -228,7 +244,7 @@ const Footer = () => {
                 display: 'flex',
                 alignItems: 'flex-start',
                 gap: '0.75rem',
-                color: '#D1D5DB',
+                color: 'rgba(255, 255, 255, 0.8)',
                 fontSize: '0.9375rem'
               }}>
                 <MapPin size={18} style={{ flexShrink: 0, marginTop: '0.2rem' }} />
@@ -237,10 +253,10 @@ const Footer = () => {
 
               <div style={{
                 fontSize: '0.875rem',
-                color: '#9CA3AF',
+                color: 'rgba(255, 255, 255, 0.6)',
                 marginTop: '0.5rem'
               }}>
-                <strong>Horario:</strong><br />
+                <strong style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Horario:</strong><br />
                 Lunes a viernes<br />
                 8:00 a.m. a 5:00 p.m.
               </div>
@@ -251,14 +267,14 @@ const Footer = () => {
         {/* Bottom bar */}
         <div style={{
           paddingTop: '2rem',
-          borderTop: '1px solid rgba(255,255,255,0.1)',
+          borderTop: '1px solid rgba(74, 144, 226, 0.2)',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '1rem',
           fontSize: '0.875rem',
-          color: '#9CA3AF'
+          color: 'rgba(255, 255, 255, 0.6)'
         }}>
           <div>
             © {currentYear} Comercial Colombiana Ltda. Todos los derechos reservados.
@@ -268,27 +284,27 @@ const Footer = () => {
             gap: '2rem',
             flexWrap: 'wrap'
           }}>
-            <a
+            
               href="#"
               style={{
-                color: '#9CA3AF',
+                color: 'rgba(255, 255, 255, 0.6)',
                 textDecoration: 'none',
                 transition: 'color 0.3s ease'
               }}
-              onMouseEnter={(e) => e.target.style.color = '#06B6D4'}
-              onMouseLeave={(e) => e.target.style.color = '#9CA3AF'}
+              onMouseEnter={(e) => e.target.style.color = '#4A90E2'}
+              onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.6)'}
             >
               Política de privacidad
             </a>
-            <a
+            
               href="#"
               style={{
-                color: '#9CA3AF',
+                color: 'rgba(255, 255, 255, 0.6)',
                 textDecoration: 'none',
                 transition: 'color 0.3s ease'
               }}
-              onMouseEnter={(e) => e.target.style.color = '#06B6D4'}
-              onMouseLeave={(e) => e.target.style.color = '#9CA3AF'}
+              onMouseEnter={(e) => e.target.style.color = '#4A90E2'}
+              onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.6)'}
             >
               Términos y condiciones
             </a>
