@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import RiskMatrix from './components/RiskMatrix';
+import StatsSection from './components/StatsSection';
 import Features from './components/Features';
 import Services from './components/Services';
 import Testimonials from './components/Testimonials';
