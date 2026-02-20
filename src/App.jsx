@@ -3,8 +3,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import RiskMatrix from './components/RiskMatrix';
 import StatsSection from './components/StatsSection';
-import Features from './components/Features';
-import Services from './components/Services';
+import WhyChooseUs from './components/WhyChooseUs';
 import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 import './styles.css';
@@ -15,8 +14,8 @@ function App() {
       <Navbar />
       <Hero />
       <RiskMatrix />
-      <Features />
-      <Services />
+      <StatsSection />
+      <WhyChooseUs />
       <Testimonials />
       <Footer />
     </div>
