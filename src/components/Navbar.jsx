@@ -16,7 +16,7 @@ const Navbar = () => {
   }, []);
 
   const menuItems = [
-    { name: 'Quiénes somos', href: '/quienes-somos' },
+    { name: 'Quiénes somos', href: '/quienes-somos', submenu: null },
     {
       name: 'Nuestros seguros',
       href: '#',
@@ -55,18 +55,17 @@ const Navbar = () => {
             { name: 'Opción de otros seguros', href: '/portafolio-de-seguros#OTROS-SEGUROS-EMPRESARIALES' }
           ]
         },
-        { name: 'Acompañamiento en Siniestros', href: '/acompanamiento-en-siniestros' },
-        { name: 'Asesoría Integral en Seguros', href: '/asesoria-integral-en-seguros' },
-        { name: 'Atención a Fondos de Empleados y Educación', href: '/atencion-a-fondos-y-educacion' }
+        { name: 'Acompañamiento en Siniestros', href: '/acompanamiento-en-siniestros', hasSubmenu: false },
+        { name: 'Asesoría Integral en Seguros', href: '/asesoria-integral-en-seguros', hasSubmenu: false },
+        { name: 'Atención a Fondos de Empleados y Educación', href: '/atencion-a-fondos-y-educacion', hasSubmenu: false }
       ]
     },
-    { name: 'Preguntas frecuentes', href: '/preguntas-frecuentes' },
-    { name: 'Blog', href: '/blog' }
+    { name: 'Preguntas frecuentes', href: '/preguntas-frecuentes', submenu: null },
+    { name: 'Blog', href: '/blog', submenu: null }
   ];
 
   return (
-    <>
-      {/* Top bar */}
+    <React.Fragment>
       <div style={{
         background: isScrolled ? 'rgba(0, 59, 113, 0.95)' : 'linear-gradient(135deg, rgba(0, 59, 113, 0.98) 0%, rgba(0, 31, 63, 0.95) 100%)',
         backdropFilter: 'blur(10px)',
@@ -105,14 +104,6 @@ const Navbar = () => {
               alignItems: 'center',
               gap: '0.5rem',
               transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = '#4A90E2';
-              e.currentTarget.style.transform = 'translateX(3px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = 'white';
-              e.currentTarget.style.transform = 'translateX(0)';
             }}>
               <Phone size={16} />
               <span>+57 (315) 685-1089</span>
@@ -124,14 +115,6 @@ const Navbar = () => {
               alignItems: 'center',
               gap: '0.5rem',
               transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = '#4A90E2';
-              e.currentTarget.style.transform = 'translateX(3px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = 'white';
-              e.currentTarget.style.transform = 'translateX(0)';
             }}>
               <Mail size={16} />
               <span>andres.arenas@comercialcolombiana.com</span>
@@ -149,14 +132,6 @@ const Navbar = () => {
                  display: 'flex',
                  alignItems: 'center',
                  gap: '0.375rem'
-               }}
-               onMouseEnter={(e) => {
-                 e.currentTarget.style.color = '#4A90E2';
-                 e.currentTarget.style.transform = 'translateY(-2px)';
-               }}
-               onMouseLeave={(e) => {
-                 e.currentTarget.style.color = 'white';
-                 e.currentTarget.style.transform = 'translateY(0)';
                }}>
               🔗 LinkedIn
             </a>
@@ -168,14 +143,6 @@ const Navbar = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '0.375rem'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = '#4A90E2';
-              e.currentTarget.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = 'white';
-              e.currentTarget.style.transform = 'translateY(0)';
             }}>
               📷 Instagram
             </a>
@@ -183,7 +150,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Main navbar */}
       <nav style={{
         position: 'sticky',
         top: 0,
@@ -205,9 +171,7 @@ const Navbar = () => {
             alignItems: 'center',
             textDecoration: 'none',
             transition: 'transform 0.3s ease'
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+          }}>
             <img 
               src="/Logo-CCL.png" 
               alt="Comercial Colombiana" 
@@ -220,156 +184,185 @@ const Navbar = () => {
             />
           </a>
 
-          {/* Desktop menu */}
-          <div style={{
-            display: 'none',
-            gap: '0.5rem',
-            alignItems: 'center'
-          }} className="desktop-menu">
-            {menuItems.map((item, index) => (
-              <div 
-                key={index}
-                style={{ position: 'relative' }}
-                onMouseEnter={() => item.submenu && setActiveDropdown(index)}
-                onMouseLeave={() => {
-                  setActiveDropdown(null);
-                  setActiveSubmenu(null);
-                }}
-              >
-                
-                  href={item.href}
-                  style={{
-                    color: '#1F2937',
-                    textDecoration: 'none',
-                    fontWeight: '600',
-                    fontSize: '0.9375rem',
-                    padding: '0.75rem 1.25rem',
-                    borderRadius: '0.5rem',
-                    transition: 'all 0.3s ease',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.25rem',
-                    background: activeDropdown === index ? 'rgba(74, 144, 226, 0.1)' : 'transparent'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#0066CC';
-                    e.currentTarget.style.background = 'rgba(74, 144, 226, 0.1)';
-                  }}
-                  onMouseLeave={(e) => {
-                    if (activeDropdown !== index) {
-                      e.currentTarget.style.color = '#1F2937';
-                      e.currentTarget.style.background = 'transparent';
-                    }
-                  }}
-                >
-                  {item.name}
-                  {item.submenu && <ChevronDown size={16} />}
-                </a>
+          <div style={{ display: 'none', gap: '0.5rem', alignItems: 'center' }} className="desktop-menu">
+            <a href="/quienes-somos" style={{
+              color: '#1F2937',
+              textDecoration: 'none',
+              fontWeight: '600',
+              fontSize: '0.9375rem',
+              padding: '0.75rem 1.25rem',
+              borderRadius: '0.5rem',
+              transition: 'all 0.3s ease'
+            }}>
+              Quiénes somos
+            </a>
 
-                {item.submenu && activeDropdown === index && (
-                  <div style={{
-                    position: 'absolute',
-                    top: '100%',
-                    left: '0',
-                    marginTop: '0.5rem',
-                    background: 'rgba(255, 255, 255, 0.98)',
-                    backdropFilter: 'blur(20px)',
-                    borderRadius: '0.75rem',
-                    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
-                    padding: '0.5rem',
-                    minWidth: '280px',
-                    border: '1px solid rgba(74, 144, 226, 0.2)',
-                    animation: 'fadeInDown 0.2s ease',
-                    zIndex: 1001
-                  }}>
-                    {item.submenu.map((subItem, subIndex) => (
-                      <div 
-                        key={subIndex}
-                        style={{ position: 'relative' }}
-                        onMouseEnter={() => subItem.hasSubmenu && setActiveSubmenu(subIndex)}
-                      >
-                        
-                          href={subItem.href}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            padding: '0.75rem 1rem',
-                            color: '#1F2937',
-                            textDecoration: 'none',
-                            borderRadius: '0.5rem',
-                            fontSize: '0.9375rem',
-                            fontWeight: '500',
-                            transition: 'all 0.2s ease'
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.background = 'rgba(74, 144, 226, 0.1)';
-                            e.currentTarget.style.color = '#0066CC';
-                            e.currentTarget.style.paddingLeft = '1.25rem';
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.background = 'transparent';
-                            e.currentTarget.style.color = '#1F2937';
-                            e.currentTarget.style.paddingLeft = '1rem';
-                          }}
-                        >
-                          {subItem.name}
-                          {subItem.hasSubmenu && <ChevronDown size={14} style={{ transform: 'rotate(-90deg)', opacity: 0.5 }} />}
-                        </a>
+            <div 
+              style={{ position: 'relative' }}
+              onMouseEnter={() => setActiveDropdown('seguros')}
+              onMouseLeave={() => {
+                setActiveDropdown(null);
+                setActiveSubmenu(null);
+              }}
+            >
+              <button style={{
+                color: '#1F2937',
+                textDecoration: 'none',
+                fontWeight: '600',
+                fontSize: '0.9375rem',
+                padding: '0.75rem 1.25rem',
+                borderRadius: '0.5rem',
+                transition: 'all 0.3s ease',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.25rem',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer'
+              }}>
+                Nuestros seguros
+                <ChevronDown size={16} />
+              </button>
 
-                        {subItem.hasSubmenu && activeSubmenu === subIndex && (
-                          <div style={{
-                            position: 'absolute',
-                            left: '100%',
-                            top: '0',
-                            marginLeft: '0.5rem',
-                            background: 'rgba(255, 255, 255, 0.98)',
-                            backdropFilter: 'blur(20px)',
-                            borderRadius: '0.75rem',
-                            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
-                            padding: '0.5rem',
-                            minWidth: '300px',
-                            maxHeight: '500px',
-                            overflowY: 'auto',
-                            border: '1px solid rgba(74, 144, 226, 0.2)',
-                            animation: 'fadeInRight 0.2s ease'
-                          }}>
-                            {subItem.items.map((nestedItem, nestedIndex) => (
-                              
-                                key={nestedIndex}
-                                href={nestedItem.href}
-                                style={{
-                                  display: 'block',
-                                  padding: '0.75rem 1rem',
-                                  color: '#1F2937',
-                                  textDecoration: 'none',
-                                  borderRadius: '0.5rem',
-                                  fontSize: '0.875rem',
-                                  fontWeight: '500',
-                                  transition: 'all 0.2s ease'
-                                }}
-                                onMouseEnter={(e) => {
-                                  e.currentTarget.style.background = 'rgba(74, 144, 226, 0.1)';
-                                  e.currentTarget.style.color = '#0066CC';
-                                  e.currentTarget.style.paddingLeft = '1.25rem';
-                                }}
-                                onMouseLeave={(e) => {
-                                  e.currentTarget.style.background = 'transparent';
-                                  e.currentTarget.style.color = '#1F2937';
-                                  e.currentTarget.style.paddingLeft = '1rem';
-                                }}
-                              >
-                                {nestedItem.name}
-                              </a>
-                            ))}
-                          </div>
-                        )}
+              {activeDropdown === 'seguros' && (
+                <div style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: '0',
+                  marginTop: '0.5rem',
+                  background: 'rgba(255, 255, 255, 0.98)',
+                  backdropFilter: 'blur(20px)',
+                  borderRadius: '0.75rem',
+                  boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
+                  padding: '0.5rem',
+                  minWidth: '280px',
+                  border: '1px solid rgba(74, 144, 226, 0.2)',
+                  zIndex: 1001
+                }}>
+                  <div onMouseEnter={() => setActiveSubmenu('personas')}>
+                    <a href="/seguros-para-personas" style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0.75rem 1rem',
+                      color: '#1F2937',
+                      textDecoration: 'none',
+                      borderRadius: '0.5rem',
+                      fontSize: '0.9375rem',
+                      fontWeight: '500',
+                      transition: 'all 0.2s ease'
+                    }}>
+                      Seguros para Personas
+                      <ChevronDown size={14} style={{ transform: 'rotate(-90deg)', opacity: 0.5 }} />
+                    </a>
+
+                    {activeSubmenu === 'personas' && (
+                      <div style={{
+                        position: 'absolute',
+                        left: '100%',
+                        top: '0',
+                        marginLeft: '0.5rem',
+                        background: 'rgba(255, 255, 255, 0.98)',
+                        backdropFilter: 'blur(20px)',
+                        borderRadius: '0.75rem',
+                        boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
+                        padding: '0.5rem',
+                        minWidth: '300px',
+                        maxHeight: '500px',
+                        overflowY: 'auto',
+                        border: '1px solid rgba(74, 144, 226, 0.2)'
+                      }}>
+                        <a href="/portafolio-de-seguros#segurocarros" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguro de Autos</a>
+                        <a href="/portafolio-de-seguros#SEGURO-DE-HOGAR" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguro de Hogar</a>
+                        <a href="/portafolio-de-seguros#SEGURO-DE-VIDA-Y-SALUD" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguro de Salud</a>
+                        <a href="/portafolio-de-seguros#SEGURO-DE-VIDA" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguro de Vida</a>
+                        <a href="/portafolio-de-seguros#SEGURO-DE-BICICLETAS" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguros para Bicicletas y Patinetas</a>
+                        <a href="/portafolio-de-seguros#SEGURO-DE-AHORRO" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguros para Ahorro y Futuro</a>
+                        <a href="/portafolio-de-seguros#SEGURO-EDUCATIVO" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguros para Educación</a>
+                        <a href="/portafolio-de-seguros#SEGURO-PARA-MASCOTAS" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguro para Mascotas</a>
+                        <a href="/portafolio-de-seguros#SEGURO-EXEQUIAL" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguros Exequiales</a>
                       </div>
-                    ))}
+                    )}
                   </div>
-                )}
-              </div>
-            ))}
+
+                  <div onMouseEnter={() => setActiveSubmenu('empresas')}>
+                    <a href="/seguros-para-empresas" style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0.75rem 1rem',
+                      color: '#1F2937',
+                      textDecoration: 'none',
+                      borderRadius: '0.5rem',
+                      fontSize: '0.9375rem',
+                      fontWeight: '500',
+                      transition: 'all 0.2s ease'
+                    }}>
+                      Seguros para Empresas
+                      <ChevronDown size={14} style={{ transform: 'rotate(-90deg)', opacity: 0.5 }} />
+                    </a>
+
+                    {activeSubmenu === 'empresas' && (
+                      <div style={{
+                        position: 'absolute',
+                        left: '100%',
+                        top: '48px',
+                        marginLeft: '0.5rem',
+                        background: 'rgba(255, 255, 255, 0.98)',
+                        backdropFilter: 'blur(20px)',
+                        borderRadius: '0.75rem',
+                        boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
+                        padding: '0.5rem',
+                        minWidth: '320px',
+                        maxHeight: '500px',
+                        overflowY: 'auto',
+                        border: '1px solid rgba(74, 144, 226, 0.2)'
+                      }}>
+                        <a href="/portafolio-de-seguros#SEGURO-DE-CUMPLIMIENTO" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguro de Cumplimiento Individual</a>
+                        <a href="/portafolio-de-seguros#SEGURO-DE-RESPONSABILIDAD-CIVIL-EMPRESARIAL" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Responsabilidad Civil Empresarial</a>
+                        <a href="/portafolio-de-seguros#ACCIDENTES-LABORALES" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Accidentes Laborales y Personales</a>
+                        <a href="/portafolio-de-seguros#VIDA-GRUPO-EMPRESARIAL" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Vida Grupo Empresarial</a>
+                        <a href="/portafolio-de-seguros#INFRAESTRUCTURA-Y-EQUIPOS" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Infraestructura y Equipos</a>
+                        <a href="/portafolio-de-seguros#CUMPLIMIENTO-EN-CONTRATOS-Y-PROYECTOS" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Cumplimiento en Contratos y Proyectos</a>
+                        <a href="/portafolio-de-seguros#SEGURO-DE-PLAN-DE-BENEFICIOS-PARA-EMPRESA" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguros para beneficios empresariales</a>
+                        <a href="/portafolio-de-seguros#SEGURO-DE-DIRECTORES-Y-ADMINISTRADORES" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguros para directivos</a>
+                        <a href="/portafolio-de-seguros#SEGURO-DE-INFIDELIDAD-Y-RIESGOS-FINANCIEROS" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguros contra infidelidad y manejo</a>
+                        <a href="/portafolio-de-seguros#SEGURO-DE-RIESGOS-CIBERNETICOS" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Seguros para riesgos cibernéticos</a>
+                        <a href="/portafolio-de-seguros#OTROS-SEGUROS-EMPRESARIALES" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Opción de otros seguros</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="/acompanamiento-en-siniestros" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.9375rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Acompañamiento en Siniestros</a>
+                  <a href="/asesoria-integral-en-seguros" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.9375rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Asesoría Integral en Seguros</a>
+                  <a href="/atencion-a-fondos-y-educacion" style={{ display: 'block', padding: '0.75rem 1rem', color: '#1F2937', textDecoration: 'none', borderRadius: '0.5rem', fontSize: '0.9375rem', fontWeight: '500', transition: 'all 0.2s ease' }}>Atención a Fondos de Empleados y Educación</a>
+                </div>
+              )}
+            </div>
+
+            <a href="/preguntas-frecuentes" style={{
+              color: '#1F2937',
+              textDecoration: 'none',
+              fontWeight: '600',
+              fontSize: '0.9375rem',
+              padding: '0.75rem 1.25rem',
+              borderRadius: '0.5rem',
+              transition: 'all 0.3s ease'
+            }}>
+              Preguntas frecuentes
+            </a>
+
+            <a href="/blog" style={{
+              color: '#1F2937',
+              textDecoration: 'none',
+              fontWeight: '600',
+              fontSize: '0.9375rem',
+              padding: '0.75rem 1.25rem',
+              borderRadius: '0.5rem',
+              transition: 'all 0.3s ease'
+            }}>
+              Blog
+            </a>
 
             <a href="/contacto" style={{
               position: 'relative',
@@ -387,14 +380,6 @@ const Navbar = () => {
               transition: 'all 0.3s ease',
               overflow: 'hidden',
               marginLeft: '0.5rem'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 102, 204, 0.4)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 102, 204, 0.3)';
             }}>
               <div style={{
                 position: 'absolute',
@@ -409,7 +394,6 @@ const Navbar = () => {
             </a>
           </div>
 
-          {/* Mobile menu button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             style={{
@@ -422,20 +406,11 @@ const Navbar = () => {
               transition: 'all 0.3s ease'
             }}
             className="mobile-menu-btn"
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(74, 144, 226, 0.2)';
-              e.currentTarget.style.transform = 'scale(1.05)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(74, 144, 226, 0.1)';
-              e.currentTarget.style.transform = 'scale(1)';
-            }}
           >
             {isMobileMenuOpen ? <X size={24} color="#0066CC" /> : <Menu size={24} color="#0066CC" />}
           </button>
         </div>
 
-        {/* Mobile menu */}
         {isMobileMenuOpen && (
           <div style={{
             position: 'absolute',
@@ -446,16 +421,11 @@ const Navbar = () => {
             backdropFilter: 'blur(20px)',
             boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
             padding: '1.5rem',
-            animation: 'fadeIn 0.3s ease',
             borderTop: '1px solid rgba(74, 144, 226, 0.2)',
             maxHeight: 'calc(100vh - 150px)',
             overflowY: 'auto'
           }}>
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.75rem'
-            }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {menuItems.map((item, index) => (
                 
                   key={index}
@@ -471,16 +441,6 @@ const Navbar = () => {
                     transition: 'all 0.3s ease'
                   }}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(74, 144, 226, 0.1)';
-                    e.currentTarget.style.paddingLeft = '1.5rem';
-                    e.currentTarget.style.color = '#0066CC';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.paddingLeft = '1rem';
-                    e.currentTarget.style.color = '#1F2937';
-                  }}
                 >
                   {item.name}
                 </a>
@@ -516,18 +476,6 @@ const Navbar = () => {
           0% { left: -100%; }
           100% { left: 200%; }
         }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInDown {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInRight {
-          from { opacity: 0; transform: translateX(-10px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
         @media (min-width: 769px) {
           .desktop-menu { display: flex !important; }
           .mobile-menu-btn { display: none !important; }
@@ -536,7 +484,7 @@ const Navbar = () => {
           .desktop-menu { display: none !important; }
         }
       `}</style>
-    </>
+    </React.Fragment>
   );
 };
 
