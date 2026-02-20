@@ -1,45 +1,58 @@
 import React from 'react';
 import { Heart, Users, Trophy, Clock } from 'lucide-react';
 
-const Features = () => {
+const WhyChooseUs = () => {
   const features = [
     {
       icon: Heart,
       title: 'Asesoría Personalizada',
       description: 'Evaluamos tus riesgos reales y te ofrecemos el seguro que realmente necesitas. Sin letra pequeña, sin rodeos.',
-      color: '#06B6D4'
+      color: '#0066CC'
     },
     {
       icon: Users,
       title: 'Atención Humana y Cercana',
       description: 'Nada de bots o respuestas automáticas. Aquí te atiende una persona real que se preocupa por ti.',
-      color: '#1E3A8A'
+      color: '#4A90E2'
     },
     {
       icon: Trophy,
       title: 'Gestión Proactiva',
       description: 'Te recordamos vencimientos, buscamos mejores tarifas y gestionamos todo antes de que tú lo pidas.',
-      color: '#F59E0B'
+      color: '#0066CC'
     },
     {
       icon: Clock,
       title: 'Acompañamiento en Siniestros',
       description: 'Te guiamos paso a paso si tienes un siniestro. Sabemos cómo lograr la mejor indemnización.',
-      color: '#10B981'
+      color: '#4A90E2'
     }
   ];
 
   return (
     <section className="section" style={{
-      background: 'linear-gradient(to bottom, white, #F9FAFB)',
+      padding: '5rem 0',
+      background: 'linear-gradient(180deg, #F3F4F6 0%, #FFFFFF 100%)',
       position: 'relative'
     }}>
       <div className="container">
         <div className="animate-fadeInUp" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 className="section-title">
+          <h2 style={{
+            fontSize: 'clamp(2rem, 4vw, 2.75rem)',
+            fontWeight: '800',
+            color: '#1F2937',
+            marginBottom: '1.5rem',
+            lineHeight: '1.2'
+          }}>
             ¿Por qué elegir Comercial Colombiana?
           </h2>
-          <p className="section-subtitle">
+          <p style={{
+            fontSize: '1.125rem',
+            color: '#6B7280',
+            lineHeight: '1.7',
+            maxWidth: '700px',
+            margin: '0 auto'
+          }}>
             Más que una agencia de seguros, somos tu aliado de confianza en protección patrimonial
           </p>
         </div>
@@ -60,37 +73,51 @@ const Features = () => {
                   padding: '2.5rem',
                   borderRadius: '1.5rem',
                   boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                  transition: 'all 0.3s ease',
+                  transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                   animationDelay: `${idx * 0.1}s`,
                   cursor: 'pointer',
-                  border: '1px solid transparent'
+                  border: '2px solid transparent',
+                  position: 'relative',
+                  overflow: 'hidden'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-10px)';
-                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)';
+                  e.currentTarget.style.transform = 'translateY(-10px) scale(1.02)';
+                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 102, 204, 0.15)';
                   e.currentTarget.style.borderColor = feature.color;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
                   e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
                   e.currentTarget.style.borderColor = 'transparent';
                 }}
               >
-                {/* Icono */}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '4px',
+                  background: `linear-gradient(90deg, ${feature.color} 0%, transparent 100%)`,
+                  opacity: 0,
+                  transition: 'opacity 0.3s ease'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = 1}
+                />
+
                 <div style={{
                   width: '70px',
                   height: '70px',
-                  background: `linear-gradient(135deg, ${feature.color}15, ${feature.color}30)`,
-                  borderRadius: '1rem',
+                  background: `${feature.color}15`,
+                  borderRadius: '1.25rem',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginBottom: '1.5rem'
+                  marginBottom: '1.5rem',
+                  transition: 'all 0.3s ease'
                 }}>
                   <Icon size={35} style={{ color: feature.color }} />
                 </div>
 
-                {/* Título */}
                 <h3 style={{
                   fontSize: '1.5rem',
                   fontWeight: '700',
@@ -100,7 +127,6 @@ const Features = () => {
                   {feature.title}
                 </h3>
 
-                {/* Descripción */}
                 <p style={{
                   color: '#6B7280',
                   lineHeight: '1.7',
@@ -113,11 +139,10 @@ const Features = () => {
           })}
         </div>
 
-        {/* Call to action central */}
         <div style={{
           marginTop: '4rem',
           padding: '3rem',
-          background: 'linear-gradient(135deg, #1E3A8A 0%, #06B6D4 100%)',
+          background: 'linear-gradient(135deg, #003B71 0%, #0066CC 100%)',
           borderRadius: '2rem',
           textAlign: 'center',
           color: 'white',
@@ -144,17 +169,31 @@ const Features = () => {
               marginBottom: '2rem',
               opacity: 0.95
             }}>
-              Descubre en 3 minutos qué seguros necesitas según tu etapa de vida
+              Descubre en 2 minutos qué seguros necesitas según tu perfil
             </p>
-            <a href="#test" className="btn" style={{
+            <a href="#analisis" style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
               background: 'white',
-              color: '#1E3A8A',
+              color: '#003B71',
               padding: '1.25rem 2.5rem',
               fontSize: '1.125rem',
               fontWeight: '700',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
+              borderRadius: '3rem',
+              textDecoration: 'none',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
+              e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0) scale(1)';
+              e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
             }}>
-              Hacer el Test Gratuito →
+              Analizar mi Nivel de Protección →
             </a>
           </div>
         </div>
@@ -163,4 +202,4 @@ const Features = () => {
   );
 };
 
-export default Features;
+export default WhyChooseUs;
