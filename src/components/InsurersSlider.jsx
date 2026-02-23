@@ -24,8 +24,8 @@ const InsurersSlider = () => {
     'Colmena Seguros',
     'Seguros Aurora',
     'Colsanitas Seguros',
-    'Cesce'
-    'Assist Card'
+    'Cesce',
+    'Assist Card',
     ];
 
   return (
