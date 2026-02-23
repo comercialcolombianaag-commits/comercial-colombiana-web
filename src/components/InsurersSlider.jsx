@@ -2,7 +2,6 @@ import React from 'react';
 import { Shield } from 'lucide-react';
 
 const InsurersSlider = () => {
-  // Lista de aseguradoras principales en Colombia
   const insurers = [
     'Seguros Bolívar',
     'Sura',
@@ -26,7 +25,7 @@ const InsurersSlider = () => {
     'Colsanitas Seguros',
     'Cesce',
     'Assist Card'
-    ];
+  ];
 
   return (
     <section style={{
@@ -37,7 +36,6 @@ const InsurersSlider = () => {
     }}>
       <div className="container">
         
-        {/* Header */}
         <div style={{
           textAlign: 'center',
           marginBottom: '4rem'
@@ -84,14 +82,12 @@ const InsurersSlider = () => {
           </p>
         </div>
 
-        {/* Slider infinito */}
         <div style={{
           position: 'relative',
           width: '100%',
           overflow: 'hidden',
           padding: '2rem 0'
         }}>
-          {/* Gradient overlays */}
           <div style={{
             position: 'absolute',
             left: 0,
@@ -113,14 +109,12 @@ const InsurersSlider = () => {
             pointerEvents: 'none'
           }} />
 
-          {/* Track del slider */}
           <div style={{
             display: 'flex',
             gap: '3rem',
             animation: 'scroll 40s linear infinite',
             width: 'max-content'
           }}>
-            {/* Primera iteración */}
             {insurers.map((insurer, idx) => (
               <div
                 key={`first-${idx}`}
@@ -159,7 +153,6 @@ const InsurersSlider = () => {
               </div>
             ))}
 
-            {/* Segunda iteración (para loop infinito) */}
             {insurers.map((insurer, idx) => (
               <div
                 key={`second-${idx}`}
@@ -200,7 +193,6 @@ const InsurersSlider = () => {
           </div>
         </div>
 
-        {/* CTA inferior */}
         <div style={{
           marginTop: '4rem',
           textAlign: 'center',
