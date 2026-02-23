@@ -8,6 +8,7 @@ import SegurosPersonas from './pages/SegurosPersonas';
 import SegurosEmpresas from './pages/SegurosEmpresas';
 import PortafolioSeguros from './pages/PortafolioSeguros';
 import AtencionFondos from './pages/AtencionFondos';
+import AsesoriaIntegral from './pages/AsesoriaIntegral';
 import './styles.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/seguros-para-empresas" element={<SegurosEmpresas />} />
           <Route path="/portafolio-de-seguros" element={<PortafolioSeguros />} />
           <Route path="/atencion-a-fondos-y-educacion" element={<AtencionFondos />} />
+          <Route path="/asesoria-integral-en-seguros" element={<AsesoriaIntegral />} />
         </Routes>
         <Footer />
       </div>
