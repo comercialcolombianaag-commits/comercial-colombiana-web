@@ -1,24 +1,24 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import RiskMatrix from './components/RiskMatrix';
-import StatsSection from './components/StatsSection';
-import WhyChooseUs from './components/WhyChooseUs';
-import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import QuienesSomos from './pages/QuienesSomos';
 import './styles.css';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Hero />
-      <RiskMatrix />
-      <StatsSection />
-      <WhyChooseUs />
-      <Testimonials />
-      <Footer />
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/inicio" element={<Home />} />
+          <Route path="/quienes-somos" element={<QuienesSomos />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
