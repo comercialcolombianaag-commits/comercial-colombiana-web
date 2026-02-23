@@ -9,7 +9,6 @@ const InsurersSlider = () => {
     'Allianz',
     'Mapfre',
     'AXA Colpatria',
-    'Liberty Seguros',
     'HDI Seguros',
     'Equidad Seguros',
     'Solidaria',
@@ -19,14 +18,13 @@ const InsurersSlider = () => {
     'SBS Seguros',
     'Zurich',
     'Chubb',
-    'QBE Seguros',
     'Berkley',
-    'ACE Seguros',
-    'Generali',
-    'Cardif',
-    'AIG',
-    'Aseguradora Solidaria'
-  ];
+    'Aseguradora Solidaria',
+    'Quálitas',
+    'Colmena Seguros',
+    'Seguros Aurora',
+    'Colsanitas Seguros',
+    ];
 
   return (
     <section style={{
