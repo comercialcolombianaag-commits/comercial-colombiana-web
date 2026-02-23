@@ -26,7 +26,7 @@ const AsesoriaIntegral = () => {
             <Shield size={20} />
             <span style={{ fontSize: '0.875rem', fontWeight: '700', letterSpacing: '0.5px' }}>ASESORÍA INTEGRAL</span>
           </div>
-          <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: '900', marginBottom: '1.5rem', lineHeight: '1.1' }}>Asesoría Integral en Seguros en Colombia</h1>
+          <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: '900', marginBottom: '1.5rem', lineHeight: '1.1' }}>Asesoría Integral de Seguros en Colombia</h1>
           <p style={{ fontSize: '1.25rem', maxWidth: '900px', margin: '0 auto 2rem', opacity: 0.95, lineHeight: '1.6' }}>En Comercial Colombiana ofrecemos una asesoría integral que va mucho más allá de vender pólizas. Evaluamos riesgos, administramos tus seguros y te acompañamos de principio a fin.</p>
           <a href="#contacto" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '1.25rem 2.5rem', background: 'white', color: '#003B71', borderRadius: '3rem', textDecoration: 'none', fontSize: '1.125rem', fontWeight: '700', boxShadow: '0 10px 30px rgba(0,0,0,0.3)', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)'; e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.4)'; }} onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0) scale(1)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)'; }}>Solicita tu asesoría</a>
         </div>
