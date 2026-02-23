@@ -31,7 +31,7 @@ const AboutUs = () => {
     { year: '2000', event: 'Expansión al sector empresarial' },
     { year: '2010', event: 'Certificación en gestión de calidad' },
     { year: '2020', event: 'Transformación digital' },
-    { year: '2025', event: 'Más de 150 clientes activos' }
+    { year: '2025', event: 'Más de 900 clientes activos' }
   ];
 
   return (
