@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import QuienesSomos from './pages/QuienesSomos';
 import SegurosPersonas from './pages/SegurosPersonas';
 import SegurosEmpresas from './pages/SegurosEmpresas';
+import PortafolioSeguros from './pages/PortafolioSeguros';
 import './styles.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/seguros-para-personas" element={<SegurosPersonas />} />
           <Route path="/seguros-para-empresa" element={<SegurosEmpresas />} />
           <Route path="/seguros-para-empresas" element={<SegurosEmpresas />} />
+          <Route path="/portafolio-de-seguros" element={<PortafolioSeguros />} />
         </Routes>
         <Footer />
       </div>
